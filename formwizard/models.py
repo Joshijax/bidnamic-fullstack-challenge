@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, User
+from django.contrib.auth.models import  User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
@@ -12,7 +12,7 @@ BIDDING_OPTIONS =(
 )
 
 
-class UserType(models.Model):
+class UserType(models.Model): #user onetoonefield for profile
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE,)
     title = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
@@ -30,7 +30,7 @@ class UserType(models.Model):
         return self.title
 
     def __unicode__(self):
-        return self.user.title
+        return self.title
 
 @receiver(post_save, sender= settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):

@@ -4,6 +4,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from formwizard.models import BIDDING_OPTIONS
 
 
+# Create five steps form
+
 class step1(forms.Form): #Note that it is not inheriting from forms.ModelForm
     title = forms.CharField(max_length=50, widget=forms.TextInput(attrs={ 'class': 'f1-first-name form-control','placeholder': 'Enter your title'}))
     company_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={ 'class': 'f1-first-name form-control','placeholder': 'Company name'}))

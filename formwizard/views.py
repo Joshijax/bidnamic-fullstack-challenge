@@ -6,19 +6,17 @@ from django.contrib import messages
 from formwizard.forms import LoginForm, step1, step2, step4, step3, step4, step5
 from django.contrib.auth import login, authenticate, logout
 
-
+# check if user is not logged
 def is_not_logged_in(f):
     @wraps(f)
     def wrap(request, *args, **kwargs):
         if request.user.is_authenticated == False:
             return f(request, *args, *kwargs)
-            
         else:
-           
             return redirect('wizard:dashboard')
-
     return wrap
 
+# check if user is logged
 def is_logged_in(f):
     @wraps(f)
     def wrap(request, *args, **kwargs):
@@ -34,7 +32,9 @@ def is_logged_in(f):
 # Create your views here.
 @is_not_logged_in
 def Home(request):
+    #if form is submitted
     if request.method == 'POST':
+        # recieve all data from the form
         title = request.POST.get('title', None)
         bidding_settings = request.POST.get('bidding_settings', None)
         company_name = request.POST.get('company_name', None)
@@ -50,11 +50,16 @@ def Home(request):
         password1 = request.POST.get('password', None)
 
         # print(firstname, lastname, emaill, password1, title, bidding_settings, company_name, birth_date, home_address, google_ads_account_ID)
-
+        
+        # check if user exists
         if User.objects.filter(email=emaill).exists():
             messages.add_message(request, messages.SUCCESS, 'email already in use')
             return redirect('wizard:home')
+        elif User.objects.filter(username=username).exists():
+            messages.add_message(request, messages.SUCCESS, 'username already in use')
+            return redirect('wizard:home')
 
+        # create user instance
         user = User.objects.create(
             first_name = firstname,
             username=username,
@@ -63,8 +68,10 @@ def Home(request):
             password = make_password(password1),
         )
         
+
         user =  User.objects.get(email=emaill,)
         profile = user.profile # because of signal and one2one relation
+        # saving user profile data 
         profile.title = title
         profile.address = home_address
         profile.company_name = company_name
@@ -74,9 +81,11 @@ def Home(request):
         profile.phone = phone_number
 
         profile.save()
-
+        
+        # authenticate the user
         user = authenticate(username=username, password=password1)
 
+        # login the user then redirect to dashboard
         login(request, user)
 
         return redirect('wizard:dashboard')
@@ -95,11 +104,14 @@ def Login(request):
         username = request.POST.get('username', None)
         password1 = request.POST.get('password', None)
         print(username,password1)
+
+        # check if username exists in database
         if not User.objects.filter(username=username).exists():
             messages.add_message(request, messages.SUCCESS, 'user does not exists')
             print('not exist')
             return redirect('wizard:login')
 
+        #  authenticate the user, login and redirect
         user = authenticate(username=username, password=password1)
         login(request, user)
         return redirect('wizard:dashboard')
@@ -107,10 +119,12 @@ def Login(request):
     context['form']= LoginForm()
     return render(request, 'login.html', context)
 
+# Dashboard view
 def Dashboard(request):
     return render(request, 'dashboard.html', )
 
 
+# Login request view
 def logout_request(request):
 
     logout(request)
