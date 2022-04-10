@@ -37,7 +37,7 @@ python manage.py runserver
 
 ## Example
 
-![alt text](https://github.com/bidnamic/bidnamic-fullstack-challenge/blob/master/logo.png?raw=true)
+![alt text](https://github.com/Joshijax/bidnamictest/blob/master/bidnamic%20test.png?raw=true)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
