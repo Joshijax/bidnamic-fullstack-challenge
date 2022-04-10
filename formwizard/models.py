@@ -5,6 +5,8 @@ from django.dispatch import receiver
 from django.conf import settings
 
 # Create your models here.
+
+# Bidding options
 BIDDING_OPTIONS =(
     ("High", "High"),
     ("Medium", "Medium"),

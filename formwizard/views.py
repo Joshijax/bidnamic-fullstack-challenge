@@ -96,7 +96,7 @@ def Home(request):
         context['step3']= step3()
         context['step4']= step4()
         context['step5']= step5()
-        return render(request, 'mfw1.html', context)
+        return render(request, 'mfw.html', context)
 
 @is_not_logged_in
 def Login(request):
