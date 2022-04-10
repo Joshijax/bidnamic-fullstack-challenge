@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BootZard - Bootstrap Wizard Template</title>
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'assets/css/form-elements.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'date-time-phone/jquery-ui.css' %}" />
+    <link rel="stylesheet" href="{% static 'date-time-phone/jquery-ui-timepicker-addon.css' %}" />
+    <!-- Date Time Picker CSS -->
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="{% static 'assets/ico/favicon.png' %}" />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="144x144"
+      href="{% static 'assets/ico/apple-touch-icon-144-precomposed.png' %}"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="114x114"
+      href="{% static 'assets/ico/apple-touch-icon-114-precomposed.png' %}"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="72x72"
+      href="{% static 'assets/ico/apple-touch-icon-72-precomposed.png' %}"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="{% static 'assets/ico/apple-touch-icon-57-precomposed.png' %}"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Top menu -->
+
+    {% block content %} {% endblock content %}
+
+    <!-- Javascript -->
+    <script src="{% static 'assets/js/jquery-1.11.1.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.backstretch.min.js' %}"></script>
+    <script src="{% static 'assets/js/retina-1.1.0.min.js' %}"></script>
+    <script src="{% static 'assets/js/scripts.js' %}"></script>
+    <!-- Date Time Picker JS -->
+<script src="{% static 'date-time-phone/jquery-ui.js' %}"></script>
+<script src="{% static 'date-time-phone/jquery-ui-timepicker-addon.js' %}"></script>
+
+<script>
+  $(function () {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear() - 18;
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+
+    today = yyyy + "-" + mm + "-" + dd;
+    // $( "#id_birth_date" ).datetimepicker({ dateFormat: 'yy-mm-dd', maxDate: 0, controlType: 'select'}).attr("autocomplete", "off") ;
+    // $("#id_birth_date")
+    //   .timepicker({
+    //     dateFormat: "yy-mm-dd",
+    //     minDate: today,
+    //     controlType: "select",
+    //   })
+    //   .attr("autocomplete", "off"); 
+    $("#id_birth_date")
+      .datepicker({ dateFormat: "yy-mm-dd", maxDate: today, })
+      .attr("autocomplete", "off");
+  });
+</script>
+<!-- Date Time Picker JS -->
+
+<!-- Phone Mask JS -->
+<script src="{% static 'date-time-phone/jquery-input-mask-phone-number.min.js' %}"></script>
+
+<script>
+  //(xxx) xxx-xxxx format code
+  $(document).ready(function () {
+    $("#id_phone_number").usPhoneFormat({
+      format: "(xxx) xxx-xxxx",
+    });
+  });
+
+  function numberOnly(id) {
+    // Get element by id which passed as parameter within HTML element event
+    var element = document.getElementById(id);
+    // This removes any other character but numbers as entered by user
+    element.value = element.value.replace(/[^0-9]/gi, "");
+  }
+</script>
+ 
+  </body>
+
+ 
+</html>

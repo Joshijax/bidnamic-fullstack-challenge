@@ -1,0 +1,53 @@
+{% extends 'base1.html' %} {% block content %} {% load static %} 
+{% include 'includes/nav.html' %}
+<div class="top-content">
+  <div class="container">
+   
+
+    <div class="row">
+      <div
+        class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 form-box"
+      >
+        <form role="form" action="#" method="post" class="f1">
+          {% csrf_token %}
+          <h3>Login To Our App</h3>
+          
+          <div class="col-xl-12">
+            {% if messages %}
+                {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }}  alert-dismissible  show"{% endif %} role="alert">
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+
+            {% endif %}
+        </div>
+          <div class="f1-steps">
+            
+          </div>
+
+          <fieldset>
+            <h4>Welcome Back</h4>
+            {% for field in form %}
+            <div class="form-group">
+              <label class="sr-only" for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+              {{ field }}
+            </div>
+            {% endfor %}
+            <div class="f1-buttons">
+              <button type="submit" class="btn btn-submit">Submit</button>
+
+            </div>
+          </fieldset>
+          <a href="{% url 'wizard:home' %}">do not have an account? Signup</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

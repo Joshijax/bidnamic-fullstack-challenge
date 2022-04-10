@@ -1,0 +1,152 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<div class="container">
+  <header>Signup Form</header>
+  <div class="progress-bar">
+    <div class="step">
+      <div class="bullet">
+        <span>1</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+    <div class="step">
+      <div class="bullet">
+        <span>2</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+
+    <div class="step">
+      <div class="bullet">
+        <span>3</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+
+    <div class="step">
+      <div class="bullet">
+        <span>4</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+
+    <div class="step">
+      <div class="bullet">
+        <span>5</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+  </div>
+  <div class="form-outer">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="page slide-page">
+        {% for field in step1 %}
+
+        <div class="field">
+          <div class="label">{{ field.label_tag }}</div>
+          {{ field }}
+          <span type="hint" class="hint">{{ field.help_text }}</span>
+        </div>
+        {% endfor %} {% comment %}
+        <div class="field">
+          <div class="label">hsjb</div>
+          <input
+            type="text"
+            oninput="numberOnly(this.id);"
+            maxlength="4"
+            minlength="3"
+            id="flight_number"
+            name="number"
+            pattern=".{3,}"
+          />
+        </div>
+        {% endcomment %}
+
+        <div class="field">
+          <button class="firstNext next">Next</button>
+        </div>
+      </div>
+
+      <div class="page">
+        {% for field in step2 %}
+
+        <div class="field">
+          <div class="label">{{ field.label_tag }}</div>
+          {{ field }}
+          <span type="hint" class="hint">{{ field.help_text }}</span>
+        </div>
+        {% endfor %} {% comment %}
+        <div class="field">
+          <div class="label">First Name</div>
+          <input type="text" required placeholder="Enter your first name..." />
+        </div>
+        <div class="field">
+          <div class="label">Last Name</div>
+          <input type="text" required placeholder="Enter your Last name..." />
+        </div>
+        <div class="field">
+          <div class="label">Date of birth</div>
+
+          <input
+            id="txtDOB"
+            name="DOB"
+            type="date"
+            required
+            placeholder="Date of Birth"
+          />
+          <span type="hint" class="hint">* For 18+ and above</span>
+        </div>
+        {% endcomment %}
+        <div class="field btns">
+          <button class="prev-1 prev">Previous</button>
+          <button class="next-1 next">Next</button>
+        </div>
+      </div>
+      <div class="page">
+        {% for field in step3 %}
+        <div class="field">
+          <div class="label">{{ field.label_tag }}</div>
+          {{ field }}
+          <span type="hint" class="hint">{{ field.help_text }}</span>
+        </div>
+        {% endfor %}
+        <div class="field btns">
+          <button class="prev-2 prev">Previous</button>
+          <button class="next-2 next">Next</button>
+        </div>
+      </div>
+      <div class="page">
+        {% for field in step4 %}
+
+        <div class="field">
+          <div class="label">{{ field.label_tag }}</div>
+          {{ field }}
+          <span type="hint" class="hint">{{ field.help_text }}</span>
+        </div>
+        {% endfor %}
+        <div class="field btns">
+          <button class="prev-2 prev">Previous</button>
+          <button class="next-2 next">Next</button>
+        </div>
+      </div>
+
+      <div class="page">
+        {% for field in step5 %}
+
+        <div class="field">
+          <div class="label">{{ field.label_tag }}</div>
+          {{ field }}
+          <span type="hint" class="hint">{{ field.help_text }}</span>
+        </div>
+        {% endfor %}
+        <div class="field btns">
+          <button class="prev-3 prev">Previous</button>
+          <button disabled="true" id="submit" type="submit">Signup</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
